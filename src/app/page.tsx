@@ -1,4 +1,3 @@
-// filepath: c:\Users\vmarq\Desktop\BOT DP\bot-dp-front\src\app\page.tsx
 "use client";
 
 import { useState } from "react";
@@ -17,14 +16,14 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/message", {
+      const res = await fetch("http://localhost:5000/consulta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ consulta: input }),
       });
       const data = await res.json();
 
-      const botMessage = { sender: "bot", text: data.response };
+      const botMessage = { sender: "bot", text: data.respuesta };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       setMessages((prev) => [
@@ -43,7 +42,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-between p-4">
-      <InfoIcon /> {/* Aquí se incluye el componente del ícono */}
+      <InfoIcon />
       <div className="w-full max-w-xl bg-white shadow-md rounded-lg flex flex-col p-4 h-[90vh]">
         <div className="flex-1 overflow-y-auto space-y-2 mb-4">
           {messages.map((msg, idx) => (
